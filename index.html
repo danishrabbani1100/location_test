@@ -2,35 +2,26 @@
 <html>
   <head>
    <script type="text/javascript">
-     function initGeolocation()
-     {
-        if( navigator.geolocation )
-        {
-           // Call getCurrentPosition with success and failure callbacks
-           navigator.geolocation.getCurrentPosition( success, fail );
-        }
-        else
-        {
-           alert("Sorry, your browser does not support geolocation services.");
-        }
-     }
+   function getMyLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(displayLocation);
+    } else {
+        alert("Oops, no geolocation support");
+    }
+}
 
-     function success(position)
-     {
+function displayLocation(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    console.dir(position);
+};
 
-         document.getElementById('long').value = position.coords.longitude;
-         document.getElementById('lat').value = position.coords.latitude
-     }
-
-     function fail()
-     {
-        // Could not obtain location
-     }
+document.onload = new function() { getMyLocation() };
 
    </script>    
  </head>
 
- <body onLoad="initGeolocation();">
+ <body onLoad="getMyLocation();">
    <FORM NAME="rd" METHOD="POST" ACTION="index.html">
      <INPUT TYPE="text" NAME="long" ID="long" VALUE="">
      <INPUT TYPE="text" NAME="lat" ID="lat" VALUE="">
